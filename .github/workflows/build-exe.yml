@@ -3,7 +3,7 @@ name: Build Windows .exe
 on:
   push:
     branches: [main]
-  workflow_dispatch: # allows manual trigger from GitHub UI
+  workflow_dispatch:
 
 jobs:
   build-tauri:
@@ -33,6 +33,20 @@ jobs:
 
       - name: Build Next.js static export
         run: npm run build
+
+      - name: Prepare Tauri icon for Windows
+        shell: bash
+        run: |
+          mkdir -p src-tauri/icons
+          python -m pip install pillow
+          python - <<'PY'
+          from PIL import Image
+          src = "src-tauri/app-icon.png"
+          dst = "src-tauri/icons/icon.ico"
+          img = Image.open(src).convert("RGBA")
+          img.save(dst, format="ICO")
+          print(f"Created {dst}")
+          PY
 
       - name: Build Tauri app
         uses: tauri-apps/tauri-action@v0
