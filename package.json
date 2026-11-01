@@ -1,7 +1,6 @@
 {
   "name": "m3e-canvas",
   "version": "0.1.0",
-  "main": "electron/main.js",
   "private": true,
   "engines": {
     "node": "^22.12.0 || ^24.0.0 || >=26.0.0"
@@ -12,7 +11,7 @@
     "start": "npx serve out",
     "typecheck": "tsc --noEmit -p .",
     "test": "vitest run",
-    "pack": "npm run build && electron-builder --win portable --publish never"
+    "tauri": "tauri"
   },
   "dependencies": {
     "html-to-image": "^1.11.13",
@@ -22,29 +21,14 @@
     "react-dom": "19.3.0"
   },
   "devDependencies": {
+    "@tauri-apps/cli": "^2",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^26",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "electron": "^33.0.0",
-    "electron-builder": "^25.0.0",
     "tailwindcss": "^4",
     "typescript": "^7",
     "vitest": "^5.0.2"
-  },
-  "build": {
-    "appId": "com.ebyiri.m3e-canvas",
-    "productName": "M3E Canvas",
-    "directories": {
-      "output": "dist"
-    },
-    "files": [
-      "electron/**/*",
-      "out/**/*"
-    ],
-    "win": {
-      "target": "portable"
-    }
   },
   "description": "Sketch Material 3 Expressive screens in the browser and turn them into vibe-coding prompts.",
   "license": "MIT",
